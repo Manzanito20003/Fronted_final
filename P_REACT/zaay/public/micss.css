@@ -1,0 +1,21 @@
+
+#caja_fondo_1 {
+    background-image: url('assets/img/listo_baner.jpg');
+    background-size: contain;
+
+  }
+#caja_fondo_2 {
+    background-image: url('assets/img/cocabaner.jpg');
+    background-size: calc();
+
+  }
+
+#caja_fondo_3{
+  background-image: url('https://www.ambrosoli.cl/wp-content/uploads/2021/09/banner_destacado_marshmallows.jpg');
+    background-size: cover;
+}
+
+.caja_p{
+    width: 390px; height: 350px; border: 1px solid black;
+
+}
