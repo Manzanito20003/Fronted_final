@@ -18,5 +18,6 @@
 
 ANEXO :
 ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/9501e432-228a-4a2a-8ef1-554f8f254249)
+![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/af19111a-f2dc-46c7-b1c8-a64055943e26)
 
 
