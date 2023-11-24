@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Shop from './Shop';
-import Login from './Login';
 //agregar login
 
 // Define las rutas 
@@ -14,7 +13,6 @@ const routes = (
 
     <Route path="/" element={<App/>} /> 
     <Route path="/Shop" element={<Shop></Shop>} />
-    <Route path="/Login" element={<Login></Login>} />
 
   </Routes>
 );
