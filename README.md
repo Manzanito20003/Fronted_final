@@ -5,7 +5,14 @@ El codigo sigue en Desarrollo
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/6149731a-8d2a-4f61-b1f4-4c59fc37019e)
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/a7c5dd3e-dcf4-4236-80db-ae4c6370551f)
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/72f6665f-91cf-44e6-ad0c-a3d58972a3d0)
-- ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/f4cf9bfa-3bff-493a-8c11-6c1f06e602c0)
+- ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/d69710b7-afb2-414a-a25b-4b4e29c65259)
+- ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/1c9dc4ae-e9a5-4dd0-912e-956bcf482e3b)
+- ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/c367eb4e-5953-4f3b-a6d8-03655414edba)
+- ![Uploading image.png…]()
+
+
+
+
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/4109ff13-7954-4e19-981a-b406303bdfb2)
 
 ## Web
