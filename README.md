@@ -8,7 +8,8 @@ El codigo sigue en Desarrollo
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/d69710b7-afb2-414a-a25b-4b4e29c65259)
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/1c9dc4ae-e9a5-4dd0-912e-956bcf482e3b)
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/c367eb4e-5953-4f3b-a6d8-03655414edba)
-- ![Uploading image.png…]()
+- ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/d832fcf2-757a-4084-bdcd-731089d81944)
+
 
 
 
