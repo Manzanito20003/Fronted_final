@@ -15,8 +15,9 @@ El APP en desarrollo
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/c367eb4e-5953-4f3b-a6d8-03655414edba)
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/d832fcf2-757a-4084-bdcd-731089d81944)
 - ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/4109ff13-7954-4e19-981a-b406303bdfb2)
-- ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/6cab7c75-0f4d-43fa-8847-78dd26657c46)
-- 
+- ![Uploading image.png…]()
+- ![image](https://github.com/Manzanito20003/Fronted_final/assets/112734981/b287a70d-6074-4344-8c28-47d0b03844fd)
+
 
 
 ## Web
