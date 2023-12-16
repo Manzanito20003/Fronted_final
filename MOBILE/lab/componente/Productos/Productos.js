@@ -1,6 +1,6 @@
 import { View} from 'react-native';
 import React from 'react'
-import { Cabeza } from '../Cabeza'
+import { Cabeza } from '../Menu/Cabeza'
 import Card from './Card'  
  
 

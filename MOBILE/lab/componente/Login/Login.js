@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { emailValidator, passwordValidator, textValidator } from './auth/validators/validators';
+import { emailValidator, passwordValidator, textValidator } from '../auth/validators/validators';
 import { TextInput as PaperTextInput, Button as PaperButton } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
   const storeData = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('user', jsonValue);
+      console.log("guardado_async",jsonValue)
     } catch (e) {
+      console.log("fail async")
       // saving error
     }
   };
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+
+
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [nameError, setNameError] = useState('');
 
 
 
@@ -33,10 +36,7 @@ const Login = ({ navigation }) => {
     setPasswordError(passwordValidator(text));
   };
 
-  const handleNameChange = (text) => {
-    setName(text);
-    setNameError(textValidator(text));
-  };
+ 
 
   const handleCrearCuenta = () => {
     navigation.navigate("Registrar", navigation);
@@ -46,23 +46,21 @@ const Login = ({ navigation }) => {
   const handleLogin = async () => {
     const emailError = emailValidator(email);
     const passwordError = passwordValidator(password);
-    const nameError = textValidator(name);
 
-    if (emailError || passwordError || nameError) {
+    if (emailError || passwordError ) {
       setEmailError(emailError);
       setPasswordError(passwordError);
-      setNameError(nameError);
       return;
     }
 
     try {
-      const response = await fetch('http://localhost:8080/cliente');
+      const response = await fetch('https://backend-deploy-production-318f.up.railway.app/cliente');
       const data = await response.json();
       const cuentaExistente = data.find((cliente) => cliente.email === email && cliente.contrasena === password);
+      console.log(cuentaExistente)
 
       if (cuentaExistente) {
         console.log('Inicio de sesión exitoso');
-        // Almacenar los datos del usuario en AsyncStorage
         storeData(cuentaExistente);
 
         // Redirigir a la página de inicio o realizar otras acciones
@@ -93,13 +91,6 @@ const Login = ({ navigation }) => {
         error={!!passwordError}
       />
       {passwordError ? <Text style={{ color: 'red' }}>{passwordError}</Text> : null}
-      <PaperTextInput
-        label="Nombre"
-        value={name}
-        onChangeText={handleNameChange}
-        error={!!nameError}
-      />
-      {nameError ? <Text style={{ color: 'red' }}>{nameError}</Text> : null}
       <PaperButton mode="contained" onPress={handleLogin} style={{ marginTop: 20 }}>
         Iniciar sesión
       </PaperButton>

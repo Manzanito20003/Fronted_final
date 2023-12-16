@@ -12,8 +12,10 @@ export const Cabeza = ({ navigation }) => {
     console.log(`Buscar: ${searchQuery}`);
     
     // Redirige a Busqueda con el productId igual al valor de búsqueda
-    navigation.navigate("Busqueda", {navigation},{ productId: searchQuery.trim() });
-  };
+    navigation.navigate("Busqueda", {
+      navigation: navigation,
+      productId: searchQuery,
+    })  };
 
   return (
     <Appbar.Header style={{ backgroundColor: '#e67e22' }}>
@@ -34,10 +36,10 @@ export const Cabeza = ({ navigation }) => {
         />
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-        <TouchableOpacity onPress={() => navigation && navigation.navigate("Login")}>
+        <TouchableOpacity onPress={() => navigation && navigation.navigate("Perfil")}>
           <AntDesign name="user" size={24} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation && navigation.navigate("MisProduct")}>
+        <TouchableOpacity onPress={() => navigation && navigation.navigate("MisProduct",navigation)}>
           <AntDesign name="shoppingcart" size={24} color="white" />
         </TouchableOpacity>
        

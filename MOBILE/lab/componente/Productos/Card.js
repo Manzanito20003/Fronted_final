@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Swiper from "react-native-swiper/src";
-import Carrito from "./Carrito";
+import Carrito from "../Menu/Carrito";
 import { AntDesign } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
@@ -21,10 +21,12 @@ const styles = StyleSheet.create({
 
   // Estilo para el texto
   text: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#333333",
     alignItems: "flex-end",
+    margin:4,
+    marginLeft:15
   },
 
   // Estilo para la tarjeta (caja_card)
@@ -76,7 +78,7 @@ const Card = ({ navigation }) => {
   const [data3, setData3] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/producto")
+    fetch("https://backend-deploy-production-318f.up.railway.app/producto")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -91,19 +93,20 @@ const Card = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <Swiper style={{ height: 250 }} loop={false} showsButtons={false}>
         {data1.map((item) => (
-          <View key={item.id} style={styles.caja_card}>
+          <View key={item.id} style={[styles.caja_card, { borderWidth: 5, borderColor: "red" }]}    >
             <Text style={styles.text}> {item.nombre}</Text>
             <Text style={styles.text}> ${item.precio}</Text>
 
             <Image source={{ uri: item.img }} style={styles.img} />
 
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection:"row-reverse",justifyContent:"space-between" ,width:"100%" ,height:"10" ,marginTop:60 ,borderWidth:5,borderColor:"red"}}>
               {" "}
               {/* Colocar el componente Carrito aquí */}
-              <Carrito id={item.id} />
+              <Carrito item={item} />
+
               {/* Colocar el botón aquí */}
               <TouchableOpacity
-                style={{ marginRight: 40 }}
+                style={{ margin:10 }}
                 onPress={() =>
                   navigation.navigate("Busqueda", {
                     navigation: navigation,
@@ -126,19 +129,20 @@ const Card = ({ navigation }) => {
 
           <Image source={{ uri: item.img }} style={styles.img} />
 
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row" ,width:800 ,height:800 ,marginTop:60}}>
             {" "}
+            
             {/* Colocar el componente Carrito aquí */}
-            <Carrito id={item.id} />
+            <Carrito item={item} />
             {/* Colocar el botón aquí */}
             <TouchableOpacity
-              style={{ marginRight: 40 }}
+              style={{ margin: 10 }}
               onPress={() =>
                 navigation.navigate("Busqueda", {
                   navigation: navigation,
-                  productId: item.id,
                 })
-              }
+              } 
+              id={item.id}
             >
               <AntDesign name="infocirlceo" size={24} color="black" />
             </TouchableOpacity>
@@ -161,13 +165,13 @@ const Card = ({ navigation }) => {
 
           <Image source={{ uri: item.img }} style={styles.img} />
 
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row" ,width:800 ,height:800 ,marginTop:60}}>
             {" "}
             {/* Colocar el componente Carrito aquí */}
-            <Carrito id={item.id} />
+            <Carrito item={item} />
             {/* Colocar el botón aquí */}
             <TouchableOpacity
-              style={{ marginRight: 40 }}
+              style={{ margin:10}}
               onPress={() =>
                 navigation.navigate("Busqueda", {
                   navigation: navigation,

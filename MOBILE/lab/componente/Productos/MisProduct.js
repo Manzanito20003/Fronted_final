@@ -1,71 +1,59 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
-import { Card, Text, Button } from 'react-native-paper';
+import { ScrollView, StyleSheet } from 'react-native';
+import { Card, Text, Button, IconButton } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const MisProduct = () => {
   const [data, setData] = useState([]);
+  const [cantidad, setCantidad] = useState(0);
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       try {
-        const jsonValue = await AsyncStorage.getItem('my-key');//sacamos la data de async
-        console.log('Async:', jsonValue);
-        if (jsonValue !== null) {
-          const parsedData = JSON.parse(jsonValue);
-          setData(parsedData);
-        } else {
-          setData([]);
-        }
+        const jsonValue = await AsyncStorage.getItem('my-key');
+        const parsedData = jsonValue != null ? JSON.parse(jsonValue) : [];
+        setData(parsedData);
+        const totalCantidad = parsedData.reduce((total, item) => total + (item.cantidad || 0), 0);
+        setCantidad(totalCantidad);
       } catch (e) {
-        console.error('Error reading data:', e);
+        console.error('Error reading value:', e);
       }
     };
-
-    getData();
+    fetchData();
   }, []);
 
   const handleIncrement = (id) => {
     const updatedData = data.map((item) => {
       if (item.id === id) {
-        return { ...item, quantity: (item.quantity || 0) + 1 };
+        return { ...item, cantidad: (item.cantidad || 0) + 1 };
       }
+
       return item;
     });
-    setData(updatedData);
-    AsyncStorage.setItem('my-key', JSON.stringify(updatedData));
+    console.log(item)
+    updateData(updatedData);
   };
 
   const handleDecrement = (id) => {
     const updatedData = data.map((item) => {
-      if (item.id === id && item.quantity > 0) {
-        return { ...item, quantity: item.quantity - 1 };
+      if (item.id === id && item.cantidad > 0) {
+        return { ...item, cantidad: item.cantidad - 1 };
       }
       return item;
     });
+    updateData(updatedData);
+  };
+
+  const updateData = (updatedData) => {
     setData(updatedData);
+    setCantidad(updatedData.reduce((total, item) => total + (item.cantidad || 0), 0));
     AsyncStorage.setItem('my-key', JSON.stringify(updatedData));
   };
 
   const POST_COMPRA = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:8080/cliente/2/compra`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ productId: id, cantidad: 1 }),
-      });
-
-      if (response.ok) {
-        console.log('Compra realizada con éxito');
-      } else {
-        console.error('Error al realizar la compra');
-      }
-    } catch (error) {
-      console.error('Error al realizar la compra', error);
-    }
+    // Simplemente mostrar un mensaje de compra
+    console.log(`Compra realizada para el producto con ID: ${id}`);
   };
 
   const limpiarCache = async () => {
@@ -73,6 +61,7 @@ export const MisProduct = () => {
       await AsyncStorage.clear();
       console.log('Caché limpiada correctamente');
       setData([]); // Limpiar también el estado local
+      setCantidad(0); // Reiniciar la cantidad
     } catch (e) {
       console.error('Error al intentar limpiar la caché:', e);
     }
@@ -80,31 +69,58 @@ export const MisProduct = () => {
 
   const borrarTodo = () => {
     setData([]);
+    setCantidad(0);
     AsyncStorage.removeItem('my-key');
     console.log('Datos de compras borrados correctamente');
   };
 
-  const style = {
-    button: {
-      // Agrega cualquier estilo adicional que necesites para tu botón aquí
+  const styles = StyleSheet.create({
+    container: {
+      padding: 10,
+      backgroundColor: '#f2f2f2',
+      flex: 1,
     },
-  };
+    card: {
+      marginBottom: 10,
+    },
+    button: {
+      backgroundColor: '#145A32',
+      color: '#ffffff',
+      padding: 10,
+      borderRadius: 40,
+      marginTop: 10,
+    },
+    buttonText: {
+      color: '#ffffff',
+    },
+    deleteButton: {
+      position: 'absolute',
+      top: 5,
+      right: 5,
+    },
+  });
 
   return (
-    <View>
-      <Button onPress={borrarTodo} style={style.button}>
-        <FontAwesome name="trash" size={10} color="black" />
-        Borrar Todo
+    <ScrollView style={styles.container}>
+      <Button onPress={borrarTodo} style={styles.button}>
+        <FontAwesome name="trash" size={16} color="#ffffff" />
+        <Text style={styles.buttonText}> Borrar Todo</Text>
       </Button>
 
-      {data.map((item, index) => (
-        <Card key={index} style={{ margin: 10 }}>
+      {data.map((item) => (
+        <Card key={item.id} style={styles.card}>
+          <IconButton
+            icon="delete"
+            size={20}
+            style={styles.deleteButton}
+            color="#ff6347"
+            onPress={() => handleDelete(item.id)}
+          />
           <Card.Content>
             <Text>ID: {item.id}</Text>
-            <Text>Author: {item.author}</Text>
-            <Text>Width: {item.width}</Text>
-            <Text>Height: {item.height}</Text>
-            <Text>Quantity: {item.quantity || 0}</Text>
+            <Text>{item.nombre}</Text>
+            <Text>Precio: {item.precio}</Text>
+            <Text>Cantidad: {item.cantidad || 0}</Text>
           </Card.Content>
 
           <Card.Actions style={{ justifyContent: 'space-between' }}>
@@ -114,6 +130,6 @@ export const MisProduct = () => {
           </Card.Actions>
         </Card>
       ))}
-    </View>
+    </ScrollView>
   );
 };
